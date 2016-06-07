@@ -1,8 +1,9 @@
-html
-  body
-    div(ng-controller='CityController')
-      form.simple-form(novalidate='')
-        | City Name: 
-        input(type='text', ng-model='city.name')
-        br
-        input(type='submit', ng-click='update(user)', value='GO!')
+//- div This is the city view.
+form(name="cityForm")
+	//- label {{vm}}
+	input(type="text" placeholder="London" ng-model="city.name")
+	input(type="button" ng-click="submitCity(cityForm)" value="Add City")
+
+input(type="button" ng-click="getCityList()" value="Get City List")
+
+//- span All cities have: {{ allCities | json }}
