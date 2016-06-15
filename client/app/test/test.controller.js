@@ -138,7 +138,7 @@ angular.module('poppinApp')
         $http.delete(senturl).then(function(resp) {
             console.log('data deleted');
             console.log(resp);
-            $scope.getNameList();
+            $scope.allNames="testing";
 
         }, function(err) {
             console.log('error submitting data');
