@@ -1,0 +1,12 @@
+//- div This is the city view.
+form(name="toDoListForm")
+
+	input(type="text" placeholder="Enter task" ng-model="task.name")
+	input(type="button" ng-click="submitTask(toDoListForm)" value="Add task")
+	
+
+	input(type="text" placeholder="Enter name" ng-model="task.taskname")
+	input(type="button" ng-click="getTaskList()" value="Get tasks")
+
+	div(ng-repeat="n in toDoList")
+		{{n | json}

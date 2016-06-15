@@ -1,0 +1,54 @@
+//- div This is the test view.
+form(name="testForm")
+	//- label {{vm}}
+	input(type="text" placeholder="Name" ng-model="test.name")
+	br
+	span give age
+	input(type="number"  ng-model="test.age")
+	input(type="button" ng-click="submitTest(testForm)" value="Add Name")
+
+	input(type="button" ng-click="getNameList()" value="Get Name List")
+
+	//- span All names have: {{ allNames[0].name }}
+	div(ng-repeat="m in allNames" class="inline" )
+		
+		//- div(style="display:inline-block; border: 1px solid black; width:100px;" class="inline")
+		div(style="display:inline-block; border: 1px solid black; width:250px;" class="inline")
+			span(style="display:inline-block; border: 1px solid black; width:100px;" class="inline" )
+				{{m.name}}
+			//- span(style="display:inline-block; border: 1px solid black; width:100px;" class="inline")
+			//- 	input(type="text" ng-hide="showEdit" placeholder="{{m.name}}" ng-model="test.name")
+	
+		
+		div(class="inline" style="display:inline-block;border: 1px solid black; width:100px;" )
+			span(style="display:inline-block; border: 1px solid black; width:100px;" class="inline" )
+				{{m.age}}
+			//- span(style="display:inline-block; border: 1px solid black; width:100px;" class="inline")
+			//- 	input(type="number" ng-hide="showEdit" placeholder="{{m.age}}" ng-model="test.age")
+		
+
+		div(class="btn-default" style="display:inline-block; width:200px;")
+			input(type="button" ng-hide="m._id == idCounter" ng-click="DisableEdit(m._id)" class="btn-default" value="Edit")
+			input(type="button" ng-hide="m._id == idCounter" value="Delete"  ng-click="DeleteRecord(m._id)" class="btn-default")
+			input(type="button" ng-show="m._id == idCounter" value="Cancel" ng-click="DisableEdit()" class="btn-default")
+	form(name="editForm" )
+		input(type="text" ng-hide="showEdit" placeholder="Edit Name" ng-model="editRecord.name")
+		input(type="number" ng-hide="showEdit" placeholder="Edit Age" ng-model="editRecord.age")
+		input(type="button" ng-hide="showEdit" ng-click="UpdateName()" value="Update Record")
+		
+	//- input(type="text" placeholder="Search" ng-model="test.searchname")
+	//- input(type="button" ng-click="SearchName()" value="Search")
+		
+	//- div
+	//- 	div(ng-repeat="n in result")
+	//- 	{{n.name}}
+	//- br
+	//- span Give name of person whose age has to be updated
+	//- 	input(type="text" placeholder="Name for updation" ng-model="test.updatename")
+	//- br
+	//- span age of person to be updated
+	//- input(type="number"  ng-model="test.updatedage")
+	//- input(type="button" ng-click="UpdateAge(testForm)" value="Update Age")
+	//- br
+	//- input(type="button" ng-click="DeleteTask(testForm)" value="Delete")
+		

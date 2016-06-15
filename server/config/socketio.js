@@ -17,6 +17,8 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/toDoList/toDoList.socket').register(socket);
+  require('../api/testpage/testpage.socket').register(socket);
   require('../api/city/city.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 
