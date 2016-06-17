@@ -10,15 +10,29 @@ angular.module('poppinApp')
     $scope.test  = {};    
     $scope.showEdit  = true;   
     $scope.idCounter  = {};   
+    var userId;
 
 
     // console.log("in  CityCtrl");
     // console.log($scope.city);
+    console.log("auth not called yet");
+
+    Auth.getCurrentUser(function(user){
+        console.log("auth called");
+        userId = user._id;
+        console.log(user);
+        console.log(userId);
+        $scope.getNameList();
+
+
+    }
+    );
+    
 
     $scope.DisableEdit = function(id) {
-        // console.log("Edit Enabled");
-        // console.log(id);
-        // console.log($scope.editRecord.name);
+        console.log("Edit Enabled");
+        console.log(id);
+        console.log($scope.editRecord.name);
         $scope.idCounter = id;
         
         $scope.showEdit  = !$scope.showEdit;  
@@ -40,7 +54,7 @@ angular.module('poppinApp')
             $scope.showEdit  = true;        
             $scope.idCounter  = true;   
             $scope.getNameList();
-
+            
         }, function(err) {
             console.log('error submitting data');
         });
@@ -74,8 +88,9 @@ angular.module('poppinApp')
     	//console.log(form);
     	console.log($scope.test);
     	console.log("submitTest");
-
-    	$http.post('/api/testpages/', {name: $scope.test.name, age: $scope.test.age}).then(function(resp) {
+        console.log(userId);
+        
+    	$http.post('/api/testpages/', {name: $scope.test.name, age: $scope.test.age, userId: userId}).then(function(resp) {
     		console.log('data submitted');
     		console.log(resp);
             $scope.getNameList();
@@ -86,26 +101,29 @@ angular.module('poppinApp')
 
     }
 
+    // $scope.getNameList = function() {
+    // 	$http.get('/api/testpages').then(function(resp) {
+    // 		$scope.allNames = resp.data; 
+    //         console.log($scope.allNames);
+
+    // 	}, function(err) {
+    // 		console.log('error retrieving data');
+
+    // 	});
+    // }
+
     $scope.getNameList = function() {
-    	$http.get('/api/testpages').then(function(resp) {
-    		$scope.allNames = resp.data; 
-            // console.log($scope.allNames);
+        console.log("idsjkdskdd");
+        console.log(userId);
 
-    	}, function(err) {
-    		console.log('error retrieving data');
-
-    	});
-    }
-
-    $scope.SearchName = function() {
-       
         $http({
             url: '/api/testpages/search',
             method: "GET",
-            params: {name: $scope.test.searchname}
+            params: {userId: userId}
           }).then(response => {
 
-            $scope.result = response.data;
+            $scope.allNames = response.data;
+            console.log("test failed");
             console.log($scope.result);
 
           
@@ -138,14 +156,13 @@ angular.module('poppinApp')
         $http.delete(senturl).then(function(resp) {
             console.log('data deleted');
             console.log(resp);
-            $scope.allNames="testing";
+            $scope.getNameList();
 
         }, function(err) {
             console.log('error submitting data');
         });
     }
 
-    $scope.getNameList();
   });
 
 

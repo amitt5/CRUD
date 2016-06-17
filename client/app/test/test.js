@@ -15,7 +15,9 @@ angular.module('poppinApp')
       .state('test', {
         url: '/test',
         templateUrl: 'app/test/test.html',
-        controller: 'TestCtrl'     
+        controller: 'TestCtrl',
+        authenticate: true
+     
            // controllerAs: 'main'
       });
   });

@@ -61,16 +61,18 @@ function handleError(res, statusCode) {
 
 // Gets a list of Testpages
 export function index(req, res) {
+  console.log("inside index");
   return Testpage.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a list of Testpages for a query
+
 export function search(req, res) {
   //var query = Testpage.find();
  console.log(req.body);
-  Testpage.find({name:  new RegExp( req.query.name , "i")})
+  Testpage.find({userId:  new RegExp( req.query.userId , "i")})
     .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -79,7 +81,8 @@ export function search(req, res) {
 
 // Gets a single Testpage from the DB
 export function show(req, res) {
-  return Testpage.findById(req.params.id).exec()
+    console.log("inside show");
+return Testpage.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -87,6 +90,9 @@ export function show(req, res) {
 
 // Creates a new Testpage in the DB
 export function create(req, res) {
+  console.log(req.body);
+  console.log("inside create");
+
   return Testpage.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

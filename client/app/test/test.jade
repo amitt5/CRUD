@@ -5,7 +5,7 @@ form(name="testForm")
 	br
 	span give age
 	input(type="number"  ng-model="test.age")
-	input(type="button" ng-click="submitTest(testForm)" value="Add Name")
+	input(type="button" ng-click="submitTest(testForm)" value="Add Record")
 
 	input(type="button" ng-click="getNameList()" value="Get Name List")
 
@@ -37,7 +37,7 @@ form(name="testForm")
 		input(type="button" ng-hide="showEdit" ng-click="UpdateName()" value="Update Record")
 		
 	//- input(type="text" placeholder="Search" ng-model="test.searchname")
-	//- input(type="button" ng-click="SearchName()" value="Search")
+	input(type="button" ng-click="SearchName()" value="Search")
 		
 	//- div
 	//- 	div(ng-repeat="n in result")
