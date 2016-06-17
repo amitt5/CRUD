@@ -6,15 +6,12 @@ angular.module('poppinApp')
     $scope.test  = {};    
     $scope.editRecord  = {};    
     $scope.allNames = {};
-    $scope.result = {};
     $scope.test  = {};    
     $scope.showEdit  = true;   
     $scope.idCounter  = {};   
     var userId;
 
 
-    // console.log("in  CityCtrl");
-    // console.log($scope.city);
     console.log("auth not called yet");
 
     Auth.getCurrentUser(function(user){
@@ -23,7 +20,6 @@ angular.module('poppinApp')
         console.log(user);
         console.log(userId);
         $scope.getNameList();
-
 
     }
     );
@@ -42,7 +38,7 @@ angular.module('poppinApp')
     }
 
      $scope.UpdateName = function() {
-        console.log("Edit Enabled");
+        console.log("update called");
         console.log($scope.idCounter);
         // console.log($scope.editRecord.name);
         var senturl = '/api/testpages/' + $scope.idCounter;
@@ -52,37 +48,28 @@ angular.module('poppinApp')
             console.log('data updated');
             console.log($scope.idCounter);
             $scope.showEdit  = true;        
-            $scope.idCounter  = true;   
-            $scope.getNameList();
+           // $scope.idCounter  = true;   
+            $scope.UpdateGrid();
             
+
         }, function(err) {
             console.log('error submitting data');
         });
 
     }
 
-    // $scope.SaveUpdates = function(form) {
-    //     console.log(form);
-    //     console.log("Save update called");
-    //     $scope.showEdit  = !$scope.showEdit;    
-    //     console.log($scope.allNames.length);
-    //     for (var i = 0; i < $scope.allNames.length; i++) { 
-    //     console.log("for loop " + i);
-    //     console.log($scope.test.updatedage);
-    //     var senturl = '/api/testpages/' + $scope.allNames[i]._id;
-        
-    //     // $http.put(senturl, {age: $scope.test.updatedage}).then(function(resp) {
-    //     //     console.log('data updated');
-    //     //     console.log(resp);
-    //     //     $scope.getNameList();
+    $scope.UpdateGrid = function() {
+        console.log("UpdateGrid called");
+        var nameInfo  = $scope.allNames;
+            _.map(nameInfo, function(obj){
+              if(obj._id== $scope.idCounter) {
+                obj.name = $scope.editRecord.name;
+                obj.age = $scope.editRecord.age;
+              }
+            });
+        $scope.idCounter  = true;   
+    }
 
-    //     // }, function(err) {
-    //     //     console.log('error submitting data');
-    //     // });
-
-    //     }
-
-    // }
 
     $scope.submitTest = function(form) {
     	//console.log(form);
@@ -101,16 +88,6 @@ angular.module('poppinApp')
 
     }
 
-    // $scope.getNameList = function() {
-    // 	$http.get('/api/testpages').then(function(resp) {
-    // 		$scope.allNames = resp.data; 
-    //         console.log($scope.allNames);
-
-    // 	}, function(err) {
-    // 		console.log('error retrieving data');
-
-    // 	});
-    // }
 
     $scope.getNameList = function() {
         console.log("idsjkdskdd");
@@ -123,29 +100,13 @@ angular.module('poppinApp')
           }).then(response => {
 
             $scope.allNames = response.data;
-            console.log("test failed");
-            console.log($scope.result);
+            console.log($scope.allNames);
 
           
           });
     }
 
-    $scope.UpdateAge = function(form) {
-
-        console.log("update guygy");
-        console.log($scope.test.updatedage);
-        var senturl = '/api/testpages/' + $scope.allNames[6]._id;
-        console.log(senturl);
-        
-        $http.put(senturl, {age: $scope.test.updatedage}).then(function(resp) {
-            console.log('data updated');
-            console.log(resp);
-            $scope.getNameList();
-
-        }, function(err) {
-            console.log('error submitting data');
-        });
-    }
+   
 
     $scope.DeleteRecord = function(id) {
 
