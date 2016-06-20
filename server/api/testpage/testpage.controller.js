@@ -71,12 +71,28 @@ export function index(req, res) {
 
 export function search(req, res) {
   //var query = Testpage.find();
- console.log(req.body);
-  Testpage.find({userId:  new RegExp( req.query.userId , "i")})
+ console.log(req.query.userId);
+ console.log(req.query.name);
+ //console.log(req.query.userId);
+  //Testpage.find({userId:  new RegExp( req.query.userId , "i")})
+  if (req.query.userId){
+      console.log("inside if");
+  Testpage.find({name:  new RegExp( req.query.name , "i"), userId:req.query.userId })
     .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
-
+    // console.log("inside if");
+    // console.log(res);
+    
+  }
+  else{
+    console.log("inside else");
+    Testpage.find({name:  new RegExp( req.query.name , "i")})
+    .exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+     
+  }
   }
 
 // Gets a single Testpage from the DB

@@ -6,6 +6,7 @@ angular.module('poppinApp')
     $scope.test  = {};    
     $scope.editRecord  = {};    
     $scope.allNames = {};
+    $scope.search = {};
     $scope.test  = {};    
     $scope.showEdit  = true;   
     $scope.idCounter  = {};   
@@ -65,6 +66,7 @@ angular.module('poppinApp')
               if(obj._id== $scope.idCounter) {
                 obj.name = $scope.editRecord.name;
                 obj.age = $scope.editRecord.age;
+
               }
             });
         $scope.idCounter  = true;   
@@ -105,6 +107,47 @@ angular.module('poppinApp')
           
           });
     }
+
+
+    $scope.searchByName = function(byUser) {
+        console.log(byUser);
+        console.log("searchByName");
+        if (byUser){
+            var byUserId = userId;
+            console.log("inside if");
+
+        }
+        console.log(userId);
+
+        $http({
+            url: '/api/testpages/search',
+            method: "GET",
+            params: {name: $scope.search.name,userId: byUserId}
+          }).then(response => {
+
+            $scope.allNames = response.data;
+            console.log(response.data);
+
+          
+          });
+    }
+
+    // $scope.searchByAge = function() {
+    //     console.log("searchByAge");
+    //     console.log(userId);
+
+    //     $http({
+    //         url: '/api/testpages/search',
+    //         method: "GET",
+    //         params: {userId: userId}
+    //       }).then(response => {
+
+    //         $scope.allNames = response.data;
+    //         console.log($scope.allNames);
+
+          
+    //       });
+    // }
 
    
 

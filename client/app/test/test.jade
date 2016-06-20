@@ -7,7 +7,6 @@ form(name="testForm")
 	input(type="number"  ng-model="test.age")
 	input(type="button" ng-click="submitTest(testForm)" value="Add Record")
 
-	input(type="button" ng-click="getNameList()" value="Get Name List")
 
 	//- span All names have: {{ allNames[0].name }}
 	div(ng-repeat="m in allNames" class="inline" )
@@ -36,6 +35,13 @@ form(name="testForm")
 		input(type="number" ng-hide="showEdit" placeholder="Edit Age" ng-model="editRecord.age")
 		input(type="button" ng-hide="showEdit" ng-click="UpdateName()" value="Update Record")
 		
-	input(type="button" ng-click="SearchName()" value="Search")
+	input(type="text" placeholder="Enter name to Search" ng-model="search.name")
+	input(type="button" ng-click="searchByName(true)" value="Search my records")
+	input(type="button" ng-click="searchByName()" value="Search all Records")
+	input(type="button" ng-click="getNameList()" value="Refresh")
+
+//- br
+	//- input(type="number" placeholder="Enter age to Search" ng-model="search.age")
+	//- input(type="button" ng-click="searchByAge()" value="Search by Age")
 		
 	
