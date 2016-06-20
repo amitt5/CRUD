@@ -75,18 +75,33 @@ export function search(req, res) {
  console.log(req.query.name);
  //console.log(req.query.userId);
   //Testpage.find({userId:  new RegExp( req.query.userId , "i")})
-  if (req.query.userId){
-      console.log("inside if");
-  Testpage.find({name:  new RegExp( req.query.name , "i"), userId:req.query.userId })
+  if (req.query.userId && req.query.age){
+      console.log("inside 1");
+  Testpage.find({name:  new RegExp( req.query.name , "i"), age:req.query.age, userId:req.query.userId })
     .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
-    // console.log("inside if");
-    // console.log(res);
     
   }
+  else if (req.query.age){
+    console.log("inside 2");
+    Testpage.find({name:  new RegExp( req.query.name , "i"), age:req.query.age})
+    .exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+     
+  }
+  else  if (req.query.userId){
+    console.log("inside 3");
+
+    Testpage.find({name:  new RegExp( req.query.name , "i"), userId:req.query.userId})
+    .exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+
+  }
   else{
-    console.log("inside else");
+    console.log("inside 4");
     Testpage.find({name:  new RegExp( req.query.name , "i")})
     .exec()
     .then(respondWithResult(res))

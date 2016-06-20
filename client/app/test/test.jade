@@ -36,12 +36,12 @@ form(name="testForm")
 		input(type="button" ng-hide="showEdit" ng-click="UpdateName()" value="Update Record")
 		
 	input(type="text" placeholder="Enter name to Search" ng-model="search.name")
+	input(type="number" placeholder="Enter age to Search" ng-model="search.age")
 	input(type="button" ng-click="searchByName(true)" value="Search my records")
 	input(type="button" ng-click="searchByName()" value="Search all Records")
 	input(type="button" ng-click="getNameList()" value="Refresh")
 
 //- br
-	//- input(type="number" placeholder="Enter age to Search" ng-model="search.age")
 	//- input(type="button" ng-click="searchByAge()" value="Search by Age")
 		
 	

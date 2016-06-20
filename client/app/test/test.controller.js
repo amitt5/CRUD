@@ -94,7 +94,7 @@ angular.module('poppinApp')
     $scope.getNameList = function() {
         console.log("idsjkdskdd");
         console.log(userId);
-
+        
         $http({
             url: '/api/testpages/search',
             method: "GET",
@@ -118,18 +118,24 @@ angular.module('poppinApp')
 
         }
         console.log(userId);
+        if ($scope.search.age == false){
+            $scope.search.age = "*";
+            console.log("inside if");
+
+        }
+        console.log($scope.search.age);
 
         $http({
             url: '/api/testpages/search',
             method: "GET",
-            params: {name: $scope.search.name,userId: byUserId}
+            params: {name: $scope.search.name,age: $scope.search.age,userId: byUserId}
+                
           }).then(response => {
 
             $scope.allNames = response.data;
             console.log(response.data);
-
-          
           });
+            
     }
 
     // $scope.searchByAge = function() {
