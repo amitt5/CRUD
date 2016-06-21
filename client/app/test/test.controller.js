@@ -62,6 +62,7 @@ angular.module('poppinApp')
     $scope.UpdateGrid = function() {
         console.log("UpdateGrid called");
         var nameInfo  = $scope.allNames;
+
             _.map(nameInfo, function(obj){
               if(obj._id== $scope.idCounter) {
                 obj.name = $scope.editRecord.name;
@@ -82,7 +83,7 @@ angular.module('poppinApp')
     	$http.post('/api/testpages/', {name: $scope.test.name, age: $scope.test.age, userId: userId}).then(function(resp) {
     		console.log('data submitted');
     		console.log(resp);
-            $scope.getNameList();
+            $scope.allNames.push(resp.data)
 
     	}, function(err) {
     		console.log('error submitting data');
@@ -94,7 +95,7 @@ angular.module('poppinApp')
     $scope.getNameList = function() {
         console.log("idsjkdskdd");
         console.log(userId);
-        
+
         $http({
             url: '/api/testpages/search',
             method: "GET",
@@ -138,24 +139,6 @@ angular.module('poppinApp')
             
     }
 
-    // $scope.searchByAge = function() {
-    //     console.log("searchByAge");
-    //     console.log(userId);
-
-    //     $http({
-    //         url: '/api/testpages/search',
-    //         method: "GET",
-    //         params: {userId: userId}
-    //       }).then(response => {
-
-    //         $scope.allNames = response.data;
-    //         console.log($scope.allNames);
-
-          
-    //       });
-    // }
-
-   
 
     $scope.DeleteRecord = function(id) {
 
@@ -166,11 +149,32 @@ angular.module('poppinApp')
         $http.delete(senturl).then(function(resp) {
             console.log('data deleted');
             console.log(resp);
-            $scope.getNameList();
+            $scope.updateNameListAfterDelete(id);
 
         }, function(err) {
             console.log('error submitting data');
         });
+    }
+
+     $scope.updateNameListAfterDelete = function(id) {
+        console.log("updateNameListAfterDelete called");
+        console.log($scope.allNames.length);
+        console.log($scope.allNames);
+        console.log(id);
+        // var nameInfo  = $scope.allNames;
+
+        for(var i=0;i<$scope.allNames.length; i++){
+            console.log(i);
+            console.log($scope.allNames[i]._id);
+            if  ($scope.allNames[i]._id == id){
+            console.log("inside if for delete  called");
+
+            delete $scope.allNames.splice(i,1);
+            }  
+        }
+        console.log($scope.allNames);
+        $scope.idCounter  = true;   
+        
     }
 
   });
